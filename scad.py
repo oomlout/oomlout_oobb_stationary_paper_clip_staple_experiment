@@ -17,7 +17,7 @@ def make_scad(**kwargs):
         #filter = "test"
 
         kwargs["save_type"] = "none"
-        #kwargs["save_type"] = "all"
+        kwargs["save_type"] = "all"
         
         navigation = False
         #navigation = True    
@@ -33,7 +33,7 @@ def make_scad(**kwargs):
         kwargs["size"] = "oobb"
         kwargs["width"] = 1
         kwargs["height"] = 1
-        kwargs["thickness"] = 3
+        kwargs["thickness"] = 9
         
     # project_variables
     if True:
@@ -51,10 +51,19 @@ def make_scad(**kwargs):
         p3 = copy.deepcopy(kwargs)
         p3["width"] = 3
         p3["height"] = 3
-        #p3["thickness"] = 6
+        p3["thickness"] = 9
         part["kwargs"] = p3
         part["name"] = "base"
         parts.append(part)
+
+        letters = ["A","C","H"]
+
+        for letter in letters:
+            part = copy.deepcopy(part)
+            p3 = copy.deepcopy(part["kwargs"])
+            p3["extra"] = letter
+            part["kwargs"] = p3
+            parts.append(part)
 
         
     #make the parts
@@ -90,9 +99,12 @@ def get_base(thing, **kwargs):
     depth = kwargs.get("thickness", 3)                    
     rot = kwargs.get("rot", [0, 0, 0])
     pos = kwargs.get("pos", [0, 0, 0])
+    extra = kwargs.get("extra", "")
     #pos = copy.deepcopy(pos)
     #pos[2] += -20
 
+    depth_base = 3
+    depth_shift = 20
     #add plate
     p3 = copy.deepcopy(kwargs)
     p3["type"] = "p"
@@ -104,16 +116,185 @@ def get_base(thing, **kwargs):
     p3["pos"] = pos1
     oobb_base.append_full(thing,**p3)
     
+    #add oobb plate cutout
+    p4 = copy.deepcopy(p3)
+    p4["type"] = "n"
+    pos1 = copy.deepcopy(pos)
+    pos1[0] += 10
+    pos1[1] += -10
+    pos1[2] += depth_base
+    p4["pos"] = pos1
+    #p4["m"] = "#"
+    oobb_base.append_full(thing,**p4)
+
+
+    ex = 1
+    #add cutouts
+    p3 = copy.deepcopy(kwargs)
+    p3["type"] = "n"
+    p3["shape"] = f"oobb_plate"
+    p3["depth"] = depth-depth_base
+    p3["width"] = 1 + ex/15
+    p3["height"] = 5
+    pos1 = copy.deepcopy(pos)
+    pos1[0] += 7.5
+    pos1[1] += 0
+    pos1[2] += depth_base
+    p3["pos"] = pos1
+    #p3["m"] = "#"
+    oobb_base.append_full(thing,**p3)
+
+    p4 = copy.deepcopy(p3)
+    p4["width"] = 5
+    p4["height"] = 1 + ex/15
+    pos1 = copy.deepcopy(pos)
+    pos1[0] += 0
+    pos1[1] += -7.5
+    pos1[2] += depth_base
+    p4["pos"] = pos1
+    #p4["m"] = "#"
+    oobb_base.append_full(thing,**p4)
+
+
     #add holes seperate
     p3 = copy.deepcopy(kwargs)
-    p3["type"] = "p"
+    p3["type"] = "n"
     p3["shape"] = f"oobb_holes"
     p3["both_holes"] = True  
-    p3["depth"] = depth
-    p3["holes"] = "perimeter"
+    p3["depth"] = depth + depth_shift
+    p3["holes"] = "single"
+    locs = []
+    locs.append([1,3])
+    locs.append([2,1])
+    locs.append([3,1])    
+    locs.append([2,2])
+    locs.append([3,2])
+
+    p3["locations"] = locs
     #p3["m"] = "#"
     pos1 = copy.deepcopy(pos)         
     p3["pos"] = pos1
+    oobb_base.append_full(thing,**p3)
+
+    #m3 holes
+    p3 = copy.deepcopy(kwargs)
+    p3["type"] = "n"
+    p3["shape"] = f"oobb_holes"
+    
+    p3["depth"] = depth + depth_shift
+    p3["holes"] = "single"
+    p3["radius_name"] = "m3"
+    locs = []
+    locs.append([1,1.5])
+    locs.append([1,2.5])
+    locs.append([1.5,1])
+    locs.append([1.5,2])
+    locs.append([1.5,3])
+    locs.append([2,1.5])
+    locs.append([2,2.5])
+    locs.append([2.5,1])
+    locs.append([2.5,2])
+    locs.append([2.5,3])
+    locs.append([3,1.5])
+    locs.append([3,2.5])    
+    p3["locations"] = locs
+    #p3["m"] = "#"
+    pos1 = copy.deepcopy(pos)
+    p3["pos"] = pos1
+    oobb_base.append_full(thing,**p3)
+
+
+    depth_top = 3
+    #top piece
+    p3 = copy.deepcopy(kwargs)
+    p3["type"] = "p"
+    p3["shape"] = f"rounded_rectangle"
+    w = 34
+    h = 34
+    d = depth_top
+    size = [w,h,d]
+    p3["size"] = size
+    pos1 = copy.deepcopy(pos)
+    pos1[0] += 5
+    pos1[1] += -5
+    pos1[2] += depth_base + depth_shift
+    p3["pos"] = pos1
+    #p3["m"] = "#"
+    oobb_base.append_full(thing,**p3)
+
+    #add cross piece one
+    p3 = copy.deepcopy(kwargs)
+    p3["type"] = "p"
+    p3["shape"] = f"oobb_cube"
+    w = 14
+    h = 44
+    d = depth_top
+    size = [w,h,d]
+    p3["size"] = size
+    pos1 = copy.deepcopy(pos)
+    pos1[0] += 7.5
+    pos1[1] += 0
+    pos1[2] += depth_base + depth_shift
+    p3["pos"] = pos1
+    #p3["m"] = "#"
+    oobb_base.append_full(thing,**p3)
+
+    #add cross piece two
+    p4 = copy.deepcopy(p3)
+    w = 44
+    h = 14
+    d = depth_top
+    size = [w,h,d]
+    p4["size"] = size
+    pos1 = copy.deepcopy(pos)
+    pos1[0] += 0
+    pos1[1] += -7.5
+    pos1[2] += depth_base + depth_shift
+    p4["pos"] = pos1
+    #p4["m"] = "#"
+    oobb_base.append_full(thing,**p4)
+
+
+    #add screw_countersunk
+    p3 = copy.deepcopy(kwargs)
+    p3["type"] = "n"
+    p3["shape"] = f"oobb_screw_countersunk"
+    p3["depth"] = depth + depth_shift
+    p3["radius_name"] = "m3"
+    p3["nut"] = True
+    p3["overhang"] = True
+    pos1 = copy.deepcopy(pos)
+    pos11 = copy.deepcopy(pos1)
+    pos11[0] += -15
+    pos11[1] += -7.5
+    pos12 = copy.deepcopy(pos1)
+    pos12[0] += 7.5
+    pos12[1] += 15
+    poss = []
+    poss.append(pos11)
+    poss.append(pos12)
+    p3["pos"] = poss
+    rot1 = copy.deepcopy(rot)
+    rot1[1] = 180
+    p3["rot"] = rot1
+    p3["m"] = "#"
+    oobb_base.append_full(thing,**p3)
+
+    #add initial
+    p3 = copy.deepcopy(kwargs)
+    p3["type"] = "p"
+    p3["shape"] = f"oobb_text"
+    p3["font"] = "Segoi UI Black:style=Bold"
+    p3["text"] = extra
+    p3["depth"] = 3
+    s = 15
+    p3["size"] = s
+    pos1 = copy.deepcopy(pos)
+    pos1[0] += -7.5
+    pos1[1] += 22 + s/2 - 1
+    pos1[2] += 0
+    p3["pos"] = pos1
+    #p3["m"] = "#"
     oobb_base.append_full(thing,**p3)
 
     if prepare_print:
