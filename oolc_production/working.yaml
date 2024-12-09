@@ -1,0 +1,6 @@
+project_id: oomlout_oobb_stationary_paper_clip_staple_experiment
+project_name: Oomlout Oobb Stationary Paper Clip Staple Experiment
+project_repo: https://github.com/oomlout/oomlout_oobb_stationary_paper_clip_staple_experiment
+production_format:
+  oolc_1:
+    file_location: source_files/oolc_1.cdr
