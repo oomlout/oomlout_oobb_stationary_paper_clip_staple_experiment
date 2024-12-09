@@ -20,24 +20,24 @@ difference() {
 		translate(v = [5, -5, 23]) {
 			hull() {
 				translate(v = [-12.0000000000, 12.0000000000, 0]) {
-					cylinder(h = 3, r = 5);
+					cylinder(h = 6, r = 5);
 				}
 				translate(v = [12.0000000000, 12.0000000000, 0]) {
-					cylinder(h = 3, r = 5);
+					cylinder(h = 6, r = 5);
 				}
 				translate(v = [-12.0000000000, -12.0000000000, 0]) {
-					cylinder(h = 3, r = 5);
+					cylinder(h = 6, r = 5);
 				}
 				translate(v = [12.0000000000, -12.0000000000, 0]) {
-					cylinder(h = 3, r = 5);
+					cylinder(h = 6, r = 5);
 				}
 			}
 		}
 		translate(v = [0.5000000000, -22.0000000000, 23]) {
-			cube(size = [14, 44, 3]);
+			cube(size = [14, 44, 6]);
 		}
 		translate(v = [-22.0000000000, -14.5000000000, 23]) {
-			cube(size = [44, 14, 3]);
+			cube(size = [44, 14, 6]);
 		}
 		translate(v = [-7.5000000000, 28.5000000000, 0]) {
 			linear_extrude(height = 3) {

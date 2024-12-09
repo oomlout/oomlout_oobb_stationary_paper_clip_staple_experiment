@@ -539,7 +539,7 @@ thing:
       size:
       - 34
       - 34
-      - 3
+      - 6
       type: positive
       width: 3
   - - - height: 3
@@ -551,7 +551,7 @@ thing:
         size:
         - 14
         - 44
-        - 3
+        - 6
         type: positive
         width: 3
   - - - height: 3
@@ -563,7 +563,7 @@ thing:
         size:
         - 44
         - 14
-        - 3
+        - 6
         type: positive
         width: 3
   - - objects:
@@ -2540,7 +2540,7 @@ thing:
     size:
     - 34
     - 34
-    - 3
+    - 6
     thickness: 9
     type: p
     width: 3
@@ -2557,7 +2557,7 @@ thing:
     size:
     - 14
     - 44
-    - 3
+    - 6
     thickness: 9
     type: p
     width: 3
@@ -2574,7 +2574,7 @@ thing:
     size:
     - 44
     - 14
-    - 3
+    - 6
     thickness: 9
     type: p
     width: 3
@@ -2646,9 +2646,9 @@ thing:
   - oobb_plate_shape_n_type_6_depth_0_-7.5_3_pos_all_save_type_true_overwrite_'3dpr'_modes_5_width_1.0666666666666667_height_9_thickness
   - oobb_holes_shape_n_type_29_depth_all_save_type_true_overwrite_'3dpr'_modes_3_width_3_height_9_thickness_true_both_holes_single_holes_1_3_2_1_3_1_2_2_3_2_locations
   - oobb_holes_shape_n_type_m3_radius_name_29_depth_all_save_type_true_overwrite_'3dpr'_modes_3_width_3_height_9_thickness_single_holes_1_1.5_1_2.5_1.5_1_1.5_2_1.5_3_2_1.5_2_2.5_2.5_1_2.5_2_2.5_3_3_1.5_3_2.5_locations
-  - rounded_rectangle_shape_p_type_5_-5_23_pos_all_save_type_true_overwrite_'3dpr'_modes_3_width_3_height_9_thickness_34_34_3_size
-  - oobb_cube_shape_p_type_7.5_0_23_pos_all_save_type_true_overwrite_'3dpr'_modes_3_width_3_height_9_thickness_14_44_3_size
-  - oobb_cube_shape_p_type_0_-7.5_23_pos_all_save_type_true_overwrite_'3dpr'_modes_3_width_3_height_9_thickness_44_14_3_size
+  - rounded_rectangle_shape_p_type_5_-5_23_pos_all_save_type_true_overwrite_'3dpr'_modes_3_width_3_height_9_thickness_34_34_6_size
+  - oobb_cube_shape_p_type_7.5_0_23_pos_all_save_type_true_overwrite_'3dpr'_modes_3_width_3_height_9_thickness_14_44_6_size
+  - oobb_cube_shape_p_type_0_-7.5_23_pos_all_save_type_true_overwrite_'3dpr'_modes_3_width_3_height_9_thickness_44_14_6_size
   - oobb_screw_countersunk_shape_n_type_m3_radius_name_29_depth_-15_-7.5_0_pos_all_save_type_true_overwrite_'3dpr'_modes_3_width_3_height_9_thickness_true_nut_true_overhang_0_180_0_rot
   - oobb_screw_countersunk_shape_n_type_m3_radius_name_29_depth_7.5_15_0_pos_all_save_type_true_overwrite_'3dpr'_modes_3_width_3_height_9_thickness_true_nut_true_overhang_0_180_0_rot
   - oobb_text_shape_p_type_3_depth_-7.5_28.5_0_pos_all_save_type_true_overwrite_'3dpr'_modes_3_width_3_height_9_thickness_segoiuiblack:style=bold_font_15_size

@@ -204,7 +204,7 @@ def get_base(thing, **kwargs):
     oobb_base.append_full(thing,**p3)
 
 
-    depth_top = 3
+    depth_top = 6
     #top piece
     p3 = copy.deepcopy(kwargs)
     p3["type"] = "p"
@@ -259,7 +259,7 @@ def get_base(thing, **kwargs):
     p3 = copy.deepcopy(kwargs)
     p3["type"] = "n"
     p3["shape"] = f"oobb_screw_countersunk"
-    p3["depth"] = depth + depth_shift
+    p3["depth"] = depth_top + depth_shift + depth_base
     p3["radius_name"] = "m3"
     p3["nut"] = True
     p3["overhang"] = True
