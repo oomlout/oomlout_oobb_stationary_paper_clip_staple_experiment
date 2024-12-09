@@ -16,7 +16,7 @@ def make_scad(**kwargs):
         filter = ""
         #filter = "test"
 
-        kwargs["save_type"] = "none"
+        #kwargs["save_type"] = "none"
         kwargs["save_type"] = "all"
         
         navigation = False
@@ -116,16 +116,23 @@ def get_base(thing, **kwargs):
     p3["pos"] = pos1
     oobb_base.append_full(thing,**p3)
     
-    #add oobb plate cutout
-    p4 = copy.deepcopy(p3)
-    p4["type"] = "n"
+    #add cube cutout
+    p3 = copy.deepcopy(kwargs)
+    p3["type"] = "n"
+    p3["shape"] = f"oobb_cube"
+    w = 44
+    h = 44
+    d = depth - depth_base
+    size = [w,h,d]
+    p3["size"] = size
     pos1 = copy.deepcopy(pos)
     pos1[0] += 10
     pos1[1] += -10
     pos1[2] += depth_base
-    p4["pos"] = pos1
-    #p4["m"] = "#"
-    oobb_base.append_full(thing,**p4)
+    p3["pos"] = pos1
+    #p3["m"] = "#"
+    oobb_base.append_full(thing,**p3)
+
 
 
     ex = 1
@@ -167,7 +174,7 @@ def get_base(thing, **kwargs):
     locs.append([1,3])
     locs.append([2,1])
     locs.append([3,1])    
-    locs.append([2,2])
+    #locs.append([2,2])
     locs.append([3,2])
 
     p3["locations"] = locs
@@ -208,7 +215,7 @@ def get_base(thing, **kwargs):
     #top piece
     p3 = copy.deepcopy(kwargs)
     p3["type"] = "p"
-    p3["shape"] = f"rounded_rectangle"
+    p3["shape"] = f"oobb_cube"
     w = 34
     h = 34
     d = depth_top
@@ -295,6 +302,21 @@ def get_base(thing, **kwargs):
     pos1[2] += 0
     p3["pos"] = pos1
     #p3["m"] = "#"
+    oobb_base.append_full(thing,**p3)
+
+    #add slice # top
+    p3 = copy.deepcopy(kwargs)
+    p3["type"] = "n"
+    p3["shape"] = f"oobb_slice"
+    #p3["m"] = "#"
+    pos1 = copy.deepcopy(pos)
+    pos1[0] += 250
+    pos1[1] += -500+40.4
+    p3["pos"] = pos1
+    rot1 = copy.deepcopy(rot)
+    rot1[2] = 45
+    p3["rot"] = rot1
+    p3["zz"] = "middle"
     oobb_base.append_full(thing,**p3)
 
     if prepare_print:
